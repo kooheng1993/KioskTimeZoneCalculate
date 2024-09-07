@@ -19,11 +19,11 @@
                 <table>
                     <thead>
                         <tr>
-                            <th>Name</th>
-                            <th>Time Difference</th>
+                            <th onclick="sortTable(0)">Name &#x21C5;</th>
+                            <th onclick="sortTable(1)">Time Difference &#x21C5;</th>
                         </tr>
                     </thead>
-                    <tbody id="kiosk-list">
+                    <tbody id="kiosk-list" data-sort-direction="asc">
                         <!-- Backend times will be injected here -->
                     </tbody>
                 </table>
