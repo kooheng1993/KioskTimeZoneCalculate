@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
     const kioskData = [
-        { name: 'JDB', diff: 14 },
+        { name: 'JDB', diff: -14 },
         { name: 'Joker', diff: -2 },
         { name: 'Vpower', diff: -2 },
         { name: 'JILI', diff: -2 },
@@ -8,10 +8,10 @@ document.addEventListener('DOMContentLoaded', function () {
         { name: 'ILoveU', diff: -2 },
         { name: 'UUSlot', diff: -2 },
         { name: 'Mega888', diff: -2 },
+        { name: 'KA Gaming (Change To GMT+8)', diff: -2 },
         { name: 'Pussy888', diff: 0 },
         { name: 'MegaH5', diff: 0 },
         { name: '918kiss', diff: 0 },
-        { name: 'KA Gaming (Change To GMT+8)', diff: 2 }
     ];
 
     // Populate the left-side table and dropdown
