@@ -19,7 +19,8 @@ document.addEventListener('DOMContentLoaded', function () {
         { name: 'Ace333', diff: -2 },
         { name: 'NEXT SPIN', diff: -2 },
         { name: 'FASTSPIN', diff: -2 },
-        { name: 'CQ9', diff: -2 }
+        { name: 'CQ9', diff: -2 },
+        { name: 'A1 Imprerium', diff: -10 }
     ];
 
     const kioskList = document.getElementById('kiosk-list');
