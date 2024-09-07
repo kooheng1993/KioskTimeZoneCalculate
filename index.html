@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Difference Calculator</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Include Select2 CSS for searchable dropdown -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Time Difference Calculator</h1>
+        </header>
+        <main>
+            <div class="left-section">
+                <h2>Kiosk Names</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Time Difference</th>
+                        </tr>
+                    </thead>
+                    <tbody id="kiosk-list">
+                        <!-- Backend times will be injected here -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="right-section">
+                <div class="current-time">
+                    <h2>Current Time: <span id="current-time"></span> (Sydney Timezone)</h2>
+                </div>
+
+                <div class="function-area">
+                    <div class="form-group">
+                        <label for="kiosk-select">Kiosk Name</label>
+                        <select id="kiosk-select" style="width: 100%;">
+                            <!-- Backend names will be searchable here -->
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="backend-time">Backend Time</label>
+                        <div class="input-group">
+                            <input type="text" id="backend-time" placeholder="Paste or choose date and time">
+                            <input type="datetime-local" id="date-time-picker">
+                        </div>
+                    </div>
+
+                    <div class="result-group">
+                        <h3>Kiosk Time</h3>
+                        <div class="time-display">
+                            <p><strong>24-hour:</strong> <span id="kiosk-time-24">--:--:--</span></p>
+                            <p><strong>12-hour:</strong> <span id="kiosk-time-12">--:--:--</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer>
+            <p>&copy; 2024 Time Difference Calculator</p>
+        </footer>
+
+        <!-- Include jQuery and Select2 JS for searchable dropdown -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+        <script src="script.js"></script>
+    </div>
+</body>
+</html>
