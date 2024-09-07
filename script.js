@@ -8,53 +8,51 @@ document.addEventListener('DOMContentLoaded', function () {
         { name: 'ILoveU', diff: -2 },
         { name: 'UUSlot', diff: -2 },
         { name: 'Mega888', diff: -2 },
-        { name: 'KA Gaming (Change To GMT+8)', diff: -2 },
+        { name: 'KA Gaming (Change to GMT+8)', diff: -2 },
         { name: 'Pussy888', diff: 0 },
         { name: 'MegaH5', diff: 0 },
         { name: '918kiss', diff: 0 },
+        { name: 'DGS', diff: 0 },
+        { name: 'Evo888', diff: 0 },
+        { name: 'Funky', diff: 0 },
+        { name: 'AAA', diff: -2 },
+        { name: 'Ace333', diff: -2 },
+        { name: 'NEXT SPIN', diff: -2 },
+        { name: 'FASTSPIN', diff: -2 },
+        { name: 'CQ9', diff: -2 }
     ];
 
-    // Populate the left-side table and dropdown
     const kioskList = document.getElementById('kiosk-list');
-    const kioskSelect = $('#kiosk-select'); // Use jQuery for Select2 support
+    const kioskSelect = $('#kiosk-select');
 
     kioskData.forEach(kiosk => {
-        // Add to the table
         let row = `<tr><td>${kiosk.name}</td><td>${kiosk.diff >= 0 ? '+' : ''}${kiosk.diff} Hours</td></tr>`;
         kioskList.innerHTML += row;
-
-        // Add to the select dropdown
         kioskSelect.append(new Option(kiosk.name, kiosk.diff));
     });
 
-    // Initialize Select2 for searchable dropdown
     kioskSelect.select2({
         placeholder: "Select a Kiosk",
         allowClear: true
     });
 
-    // Update current time every second
     function updateCurrentTime() {
         const currentTimeElement = document.getElementById('current-time');
         const now = new Date().toLocaleString('en-AU', { timeZone: 'Australia/Sydney', hour12: false });
         currentTimeElement.textContent = now;
     }
 
-    updateCurrentTime(); // Initial call
+    updateCurrentTime();
     setInterval(updateCurrentTime, 1000);
 
-    // Event Listeners
     kioskSelect.on('change', updateKioskTime);
     document.getElementById('backend-time').addEventListener('input', updateKioskTime);
-    document.getElementById('backend-time').addEventListener('paste', function () {
-        setTimeout(updateKioskTime, 100); // Allow paste to complete
-    });
+    document.getElementById('backend-time').addEventListener('paste', () => setTimeout(updateKioskTime, 100));
     document.getElementById('date-time-picker').addEventListener('input', function () {
         document.getElementById('backend-time').value = this.value.replace('T', ' ');
         updateKioskTime();
     });
 
-    // Function to update Kiosk Time
     function updateKioskTime() {
         const backendTimeInput = document.getElementById('backend-time').value.trim();
         const selectedDiff = parseInt(kioskSelect.val());
@@ -64,17 +62,13 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
 
-        // Parse backend time
         const backendDate = parseBackendTime(backendTimeInput);
         if (!backendDate) {
             displayInvalidTime();
             return;
         }
 
-        // Adjust time based on difference
         backendDate.setHours(backendDate.getHours() + selectedDiff);
-
-        // Display in 24-hour and 12-hour formats
         const kioskTime24 = backendDate.toLocaleString('en-AU', { hour12: false });
         const kioskTime12 = backendDate.toLocaleString('en-AU', { hour12: true });
 
@@ -82,21 +76,15 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('kiosk-time-12').textContent = kioskTime12;
     }
 
-    // Function to parse backend time input
     function parseBackendTime(input) {
-        // Attempt to parse the input as a valid date
         const parsedDate = new Date(input);
-        if (!isNaN(parsedDate)) {
-            return parsedDate;
-        }
+        if (!isNaN(parsedDate)) return parsedDate;
 
-        // Attempt to parse the input manually (e.g., "2024-09-07 15:30:03")
         const dateTimeParts = input.split(' ');
         if (dateTimeParts.length !== 2) return null;
 
         const dateParts = dateTimeParts[0].split('-');
         const timeParts = dateTimeParts[1].split(':');
-
         if (dateParts.length !== 3 || timeParts.length !== 3) return null;
 
         const [year, month, day] = dateParts.map(part => parseInt(part, 10));
@@ -105,13 +93,38 @@ document.addEventListener('DOMContentLoaded', function () {
         return new Date(year, month - 1, day, hours, minutes, seconds);
     }
 
-    // Function to display invalid time message
     function displayInvalidTime() {
         document.getElementById('kiosk-time-24').textContent = 'Invalid Time';
         document.getElementById('kiosk-time-12').textContent = 'Invalid Time';
     }
 
-    // Initial calculation if backend time is pre-filled
+    function sortTable(columnIndex) {
+        const table = document.querySelector('table tbody');
+        const rows = Array.from(table.querySelectorAll('tr'));
+        const direction = table.getAttribute('data-sort-direction') === 'asc' ? 'desc' : 'asc';
+        table.setAttribute('data-sort-direction', direction);
+
+        rows.sort((rowA, rowB) => {
+            const cellA = rowA.querySelectorAll('td')[columnIndex].textContent.trim();
+            const cellB = rowB.querySelectorAll('td')[columnIndex].textContent.trim();
+
+            if (columnIndex === 1) {
+                return direction === 'asc' ? parseFloat(cellA) - parseFloat(cellB) : parseFloat(cellB) - parseFloat(cellA);
+            } else {
+                return direction === 'asc' ? cellA.localeCompare(cellB) : cellB.localeCompare(cellA);
+            }
+        });
+
+        rows.forEach(row => table.appendChild(row));
+    }
+
+    // Bind sorting functions to table headers
+    document.querySelectorAll('th').forEach((header, index) => {
+        header.addEventListener('click', function () {
+            sortTable(index);
+        });
+    });
+
     if (document.getElementById('backend-time').value) {
         updateKioskTime();
     }
