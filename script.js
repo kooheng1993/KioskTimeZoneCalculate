@@ -47,11 +47,28 @@ document.addEventListener('DOMContentLoaded', function () {
 
     kioskSelect.on('change', updateKioskTime);
     document.getElementById('backend-time').addEventListener('input', updateKioskTime);
-    document.getElementById('backend-time').addEventListener('paste', () => setTimeout(updateKioskTime, 100));
+    document.getElementById('backend-time').addEventListener('paste', handlePasteEvent);
     document.getElementById('date-time-picker').addEventListener('input', function () {
         document.getElementById('backend-time').value = this.value.replace('T', ' ');
         updateKioskTime();
     });
+
+    function handlePasteEvent(event) {
+        event.preventDefault();
+        const pastedData = (event.clipboardData || window.clipboardData).getData('text');
+
+        // Regular expression to capture the date and time part
+        const dateTimeRegex = /\[(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})\]/;
+        const match = pastedData.match(dateTimeRegex);
+
+        if (match) {
+            const extractedDateTime = match[1];
+            document.getElementById('backend-time').value = extractedDateTime;
+            updateKioskTime();
+        } else {
+            document.getElementById('backend-time').value = pastedData; // Default fallback
+        }
+    }
 
     function updateKioskTime() {
         const backendTimeInput = document.getElementById('backend-time').value.trim();
@@ -97,33 +114,6 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('kiosk-time-24').textContent = 'Invalid Time';
         document.getElementById('kiosk-time-12').textContent = 'Invalid Time';
     }
-
-    function sortTable(columnIndex) {
-        const table = document.querySelector('table tbody');
-        const rows = Array.from(table.querySelectorAll('tr'));
-        const direction = table.getAttribute('data-sort-direction') === 'asc' ? 'desc' : 'asc';
-        table.setAttribute('data-sort-direction', direction);
-
-        rows.sort((rowA, rowB) => {
-            const cellA = rowA.querySelectorAll('td')[columnIndex].textContent.trim();
-            const cellB = rowB.querySelectorAll('td')[columnIndex].textContent.trim();
-
-            if (columnIndex === 1) {
-                return direction === 'asc' ? parseFloat(cellA) - parseFloat(cellB) : parseFloat(cellB) - parseFloat(cellA);
-            } else {
-                return direction === 'asc' ? cellA.localeCompare(cellB) : cellB.localeCompare(cellA);
-            }
-        });
-
-        rows.forEach(row => table.appendChild(row));
-    }
-
-    // Bind sorting functions to table headers
-    document.querySelectorAll('th').forEach((header, index) => {
-        header.addEventListener('click', function () {
-            sortTable(index);
-        });
-    });
 
     if (document.getElementById('backend-time').value) {
         updateKioskTime();
