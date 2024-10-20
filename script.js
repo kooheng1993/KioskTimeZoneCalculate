@@ -1,26 +1,26 @@
 document.addEventListener('DOMContentLoaded', function () {
     const kioskData = [
-        { name: 'JDB', diff: -14 },
-        { name: 'Joker', diff: -2 },
-        { name: 'Vpower', diff: -2 },
-        { name: 'JILI', diff: -2 },
-        { name: 'AWC', diff: -2 },
-        { name: 'ILoveU', diff: -2 },
-        { name: 'UUSlot', diff: -2 },
-        { name: 'Mega888', diff: -2 },
-        { name: 'KA Gaming (Change to GMT+8)', diff: -2 },
+        { name: 'JDB', diff: -15 },
+        { name: 'Joker', diff: -3 },
+        { name: 'Vpower', diff: -3 },
+        { name: 'JILI', diff: -3 },
+        { name: 'AWC', diff: -3 },
+        { name: 'ILoveU', diff: -3 },
+        { name: 'UUSlot', diff: -3 },
+        { name: 'Mega888', diff: -3 },
+        { name: 'KA Gaming (Change to GMT+8)', diff: -3 },
         { name: 'Pussy888', diff: 0 },
         { name: 'MegaH5', diff: 0 },
         { name: '918kiss', diff: 0 },
         { name: 'DGS', diff: 0 },
         { name: 'Evo888', diff: 0 },
         { name: 'Funky', diff: 0 },
-        { name: 'AAA', diff: -2 },
-        { name: 'Ace333', diff: -2 },
-        { name: 'NEXT SPIN', diff: -2 },
-        { name: 'FASTSPIN', diff: -2 },
-        { name: 'CQ9', diff: -2 },
-        { name: 'A1 Imprerium', diff: -10 }
+        { name: 'AAA', diff: -3 },
+        { name: 'Ace333', diff: -3 },
+        { name: 'NEXT SPIN', diff: -3 },
+        { name: 'FASTSPIN', diff: -3 },
+        { name: 'CQ9', diff: -3 },
+        { name: 'A1 Imprerium', diff: -11 }
     ];
 
     const kioskList = document.getElementById('kiosk-list');
