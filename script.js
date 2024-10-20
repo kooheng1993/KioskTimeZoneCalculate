@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
         { name: 'NEXT SPIN', diff: -3 },
         { name: 'FASTSPIN', diff: -3 },
         { name: 'CQ9', diff: -3 },
-        { name: 'A1 Imprerium', diff: -11 }，
+        { name: 'A1 Imprerium', diff: -11 },
         { name: 'APOLLO', diff: -3 }
     ];
 
