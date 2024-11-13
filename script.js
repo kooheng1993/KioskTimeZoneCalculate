@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
     const kioskData = [
-        { name: 'JDB', diff: -15 },
+        { name: 'JDB', diff: -7 },
         { name: 'Joker', diff: -3 },
         { name: 'Vpower', diff: -3 },
         { name: 'JILI', diff: -3 },
